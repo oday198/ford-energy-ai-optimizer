@@ -49,7 +49,7 @@ Ford Energy is scaling BESS deployments for data centers. This system optimizes 
 
 ## Architecture
 
-![System Architecture](docs/screenshots/architecture.png)
+![System Architecture](docs/screenshots/architucture.png)
 
 ```mermaid
 graph TD
