@@ -1,27 +1,119 @@
-# Ford Energy AI Optimizer — BESS Dispatch Intelligence (Prototype)
+# Ford Energy AI Optimizer — BESS Dispatch Intelligence
 
-End-to-end prototype aligned to Ford GDIA role:
-- ML load forecasting (XGBoost)
-- BESS dispatch optimization (MILP)
-- Agentic GenAI analyst (LangGraph) + RAG (Chroma) + citations
-- Guardrails (input validation) + observability (Langfuse tracing)
-- RAG evaluation report (RAGAS)
+> End-to-end AI prototype built around Ford Energy's Battery Energy Storage System (BESS) business.  
+> Directly aligned with the Ford GDIA AI Engineer role requirements.
 
-## Local Run (Python)
+---
+
+## What This Solves
+
+Ford Energy is scaling BESS deployments for data centers. This system optimizes **when to charge and discharge** batteries to minimize electricity costs — saving **$47,140 (5.55%)** over a 336-hour horizon in simulation.
+
+---
+
+## Live Demo Screenshots
+
+### Dashboard Overview — MILP Optimizer Results
+![Dashboard Overview](docs/screenshots/01_dashboard_overview.png)
+
+### Time Series — Load, Grid, and BESS Power Dispatch
+![Time Series](docs/screenshots/02_time_series.png)
+
+### State of Charge & Electricity Price Tracking
+![SOC and Price](docs/screenshots/03_soc_price.png)
+
+### Cost Breakdown — Before vs After Dispatch
+![Cost Breakdown](docs/screenshots/04_cost_breakdown.png)
+
+### REST API — FastAPI with OpenAPI Docs
+![API Docs](docs/screenshots/05_api_docs.png)
+
+---
+
+## Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Forecasting | XGBoost, Scikit-learn |
+| Optimization | MILP (PuLP) |
+| GenAI Agent | LangGraph + LangChain + OpenAI |
+| RAG | Chroma Vector DB |
+| Observability | Langfuse tracing |
+| Evaluation | RAGAS framework |
+| API | FastAPI |
+| UI | Streamlit |
+| Containerization | Docker + Docker Compose |
+| Cloud-ready | GCP / AWS compatible |
+
+---
+
+## Architecture
+
+
+User Query
+│
+▼
+GenAI Analyst (LangGraph Agent)
+│
+├── RAG Tool (Chroma + KB docs)
+├── Dispatch Artifacts (MILP results)
+└── Guardrails (input validation)
+│
+▼
+Langfuse Tracing (observability)
+
+---
+
+## Modules
+
+- **ML Load Forecasting** — XGBoost model predicting data center energy demand
+- **BESS Dispatch Optimizer** — MILP solver deciding charge/discharge schedule to minimize cost
+- **GenAI Analyst** — Agentic RAG workflow explaining anomalies and giving manager-ready insights
+- **Observability** — Full Langfuse tracing of every agent reasoning step
+- **RAG Evaluation** — RAGAS metrics on retrieval quality
+
+---
+
+## Local Run
+
 ```bash
 pip install -e .
 python -m energy_ai.data.make_dataset
 python -m energy_ai.optimizer.run_dispatch
 python -m energy_ai.data.build_kb
 streamlit run src/energy_ai/ui/app.py
+```
 
-
-API
+**API:**
+```bash
 uvicorn energy_ai.api.main:app --host 0.0.0.0 --port 8000
+```
 
-Docker
-docker build -t ford-energy-ai-optimizer:local .
+**Docker:**
+```bash
 docker compose up
+```
 
-Eval
+**RAG Eval:**
+```bash
 python -m energy_ai.eval.run_rag_eval
+```
+
+---
+
+## Alignment to Ford GDIA Role
+
+| Job Requirement | This Project |
+|---|---|
+| Agentic AI workflows (LangGraph) | ✅ LangGraph agent with tool use |
+| RAG pipelines | ✅ Chroma + KB docs + citations |
+| ML models (supervised) | ✅ XGBoost load forecasting |
+| Observability (Langfuse) | ✅ Full trace logging |
+| Guardrails & input validation | ✅ Implemented |
+| RAGAS evaluation | ✅ eval/run_rag_eval.py |
+| Python + FastAPI | ✅ Production API |
+| Cloud-ready deployment | ✅ Docker + GCP/AWS compatible |
+
+---
+
+*Built as a technical demonstration for the Ford GDIA AI Engineer role. Uses open datasets and public APIs only — no Ford internal data.*
