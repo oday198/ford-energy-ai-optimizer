@@ -1,0 +1,17 @@
+services:
+  api:
+    image: ford-energy-ai-optimizer:local
+    env_file:
+      - .env
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+
+  ui:
+    image: ford-energy-ai-optimizer:local
+    env_file:
+      - .env
+    command: streamlit run src/energy_ai/ui/app.py --server.port=8501 --server.address=0.0.0.0
+    ports:
+      - "8501:8501"
+    restart: unless-stopped
