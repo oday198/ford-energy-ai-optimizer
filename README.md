@@ -49,18 +49,24 @@ Ford Energy is scaling BESS deployments for data centers. This system optimizes 
 
 ## Architecture
 
+![System Architecture](docs/screenshots/architecture.png)
 
-User Query
-│
-▼
-GenAI Analyst (LangGraph Agent)
-│
-├── RAG Tool (Chroma + KB docs)
-├── Dispatch Artifacts (MILP results)
-└── Guardrails (input validation)
-│
-▼
-Langfuse Tracing (observability)
+```mermaid
+graph TD
+    U[👤 User/Manager] --> UI[🖥️ Streamlit UI]
+    U --> API[⚡ FastAPI REST]
+    UI --> AG[🤖 GenAI Analyst - LangGraph]
+    API --> AG
+    AG --> RAG[📚 RAG Tool - Chroma]
+    AG --> ART[📊 Dispatch Artifacts]
+    AG --> GRD[🛡️ Guardrails]
+    AG --> LF[🔭 Langfuse Tracing]
+    RAG --> FC[📈 XGBoost Forecaster]
+    ART --> OPT[⚙️ MILP Optimizer]
+    FC --> DATA[🗄️ Energy Data]
+    OPT --> DATA
+    FC --> EVAL[📐 RAGAS Eval]
+```
 
 ---
 
@@ -76,28 +82,28 @@ Langfuse Tracing (observability)
 
 ## Local Run
 
-```bash
+​```bash
 pip install -e .
 python -m energy_ai.data.make_dataset
 python -m energy_ai.optimizer.run_dispatch
 python -m energy_ai.data.build_kb
 streamlit run src/energy_ai/ui/app.py
-```
+​```
 
 **API:**
-```bash
+​```bash
 uvicorn energy_ai.api.main:app --host 0.0.0.0 --port 8000
-```
+​```
 
 **Docker:**
-```bash
+​```bash
 docker compose up
-```
+​```
 
 **RAG Eval:**
-```bash
+​```bash
 python -m energy_ai.eval.run_rag_eval
-```
+​```
 
 ---
 
