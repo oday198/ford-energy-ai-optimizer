@@ -116,4 +116,4 @@ python -m energy_ai.eval.run_rag_eval
 
 ---
 
-*Built as a technical demonstration for the Ford GDIA AI Engineer role. Uses open datasets and public APIs only — no Ford internal data.*
+*Motivated by Ford's expansion into energy AI, this project was built to deepen hands-on expertise in agentic systems, BESS optimization, and production-grade ML. Uses open datasets and public APIs only — no Ford internal data.*
