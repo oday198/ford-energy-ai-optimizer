@@ -14,19 +14,19 @@ Ford Energy is scaling BESS deployments for data centers. This system optimizes 
 ## Live Demo Screenshots
 
 ### Dashboard Overview — MILP Optimizer Results
-![Dashboard Overview](docs/screenshots/01_dashboard_overview.png)
+![Dashboard Overview](docs/screenshots/ford1.png)
 
 ### Time Series — Load, Grid, and BESS Power Dispatch
-![Time Series](docs/screenshots/02_time_series.png)
+![Time Series](docs/screenshots/ford2.png)
 
 ### State of Charge & Electricity Price Tracking
-![SOC and Price](docs/screenshots/03_soc_price.png)
+![SOC and Price](docs/screenshots/ford3.png)
 
 ### Cost Breakdown — Before vs After Dispatch
-![Cost Breakdown](docs/screenshots/04_cost_breakdown.png)
+![Cost Breakdown](docs/screenshots/ford4.png)
 
 ### REST API — FastAPI with OpenAPI Docs
-![API Docs](docs/screenshots/05_api_docs.png)
+![API Docs](docs/screenshots/ford5docs.png)
 
 ---
 
